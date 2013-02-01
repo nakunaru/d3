@@ -1,0 +1,61 @@
+<html>
+<head>
+<meta charset="utf-8">
+<title>グラフの変化をアニメーションで表現する</title>
+<script type="text/javascript" src="./d3.v3.min.js"></script>
+<style>
+    .graph{
+        width: 3px;
+        height: 20;
+        border: 1px solid #000;
+        margin: 3px;
+    }
+</style>
+</head>
+<body>
+グラフの変化をアニメーションで表現する
+<div class="graph"></div>
+<div class="graph"></div>
+<div class="graph"></div>
+<div class="graph"></div>
+<div class="graph"></div>
+<input type="button" onClick="setData1()" value="data1に切り替え">
+<input type="button" onClick="setData2()" value="data2に切り替え">
+
+<script language="javascript">
+    var data1 = [100,50,200,300,10];
+    var data2 = [120,5,220,250,300];
+    var graph = d3.selectAll('.graph');
+
+    function setData1(){
+        graph.data(data1)
+        .transition()      // アニメーション開始
+        .duration(600)          // アニメーションの処理時間
+        .delay(10)              // アニメーション処理開始までの遅延時間
+        .text(function(d){return d;})
+        .style('width',function(d){return d;});      // data1の値をセット
+    }
+
+    function setData2(){
+        graph.data(data2)
+        .transition()      // アニメーション開始
+        .duration(600)          // アニメーションの処理時間
+        .delay(10)              // アニメーション処理開始までの遅延時間
+        .text(function(d){return d;})
+        .style('width',function(d){return d;});      // data1の値をセット
+    }
+
+    // 初期データセット
+    graph.data([0,0,0,0,0]).text(function(d){return ' ';}).style('width',function(d){return d;});
+    graph.data(data1)
+    .transition()
+    .duration(600)
+    .delay(300)
+    .text(function(d){return d;})
+    .style('width',function(d){return d;});
+
+
+</script>
+
+</body>
+</html>
