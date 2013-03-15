@@ -1,0 +1,62 @@
+<html>
+<head>
+<meta charset="utf-8">
+<title>複数要素のまとめて処理</title>
+<script type="text/javascript" src="./d3.v3.min.js"></script>
+<style>
+    .graph{
+        width: 3px;
+        height: 20;
+        border: 1px solid #000;
+        margin: 3px;
+    }
+</style>
+</head>
+<body>
+
+<div class="graph"></div>
+<div class="graph"></div>
+<div class="graph"></div>
+<div class="graph"></div>
+<div class="graph"></div>
+
+<script language="javascript">
+// 5つの要素をselectAllで取得
+var graphs = d3.selectAll(".graph");
+
+// 全要素のstyle属性をまとめて変更
+graphs.style("width", "100");
+
+// 全要素にデータを配列で渡す
+graphs.data([100,110,120,130,140]);
+graphs.data([100,110,120,130,140]).style("width",function(d){return d;});
+
+// 各要素の配列を個別に渡す
+graphs.data([[100,10], [200,20], [300,30], [400,40], [500,50]]);
+// →各DOM要素の__data__に配列が渡る
+
+graphs.data([[100,10], [200,20], [300,30], [400,40], [500,50]]).
+    style("width",function(d){return d[0];});
+// →配列のindex 0をwidthに適用
+
+graphs.data([[100,10], [200,20], [300,30], [400,40], [500,50]]).
+    style("height",function(d){return d[1];});
+// →配列のindex 1をheightに適用
+
+graphs.data([[100,10], [200,20], [300,30], [400,40], [500,50]]).
+    style("width",function(d){return d[0];}).
+    style("height",function(d){return d[1];});
+// →1文で配列を処理（d3.jsではstyleは1属性ずつしか扱えない）
+
+
+
+
+
+
+
+</script>
+
+
+
+</body>
+</html>
